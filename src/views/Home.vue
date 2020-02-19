@@ -3,6 +3,7 @@
     <h1>{{ message }}</h1>
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
+      <img v-bind:src="recipe.image_url" alt="">
       <p>Ingredients: {{ recipe.ingredients }}</p>
       <p>Directions: {{ recipe.directions }}</p>
       <p>Prep time: {{ recipe.formatted.prep_time }}</p>
@@ -11,6 +12,9 @@
 </template>
 
 <style>
+ img {
+  width: 250px;
+ }
 </style>
 
 <script>
