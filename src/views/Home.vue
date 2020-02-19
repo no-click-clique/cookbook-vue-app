@@ -12,14 +12,17 @@
       <button v-on:click="createRecipe()">Create</button>
     </div>
 
-
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
-      <img v-bind:src="recipe.image_url" alt="">
-      <p>Ingredients: {{ recipe.ingredients }}</p>
-      <p>Directions: {{ recipe.directions }}</p>
-      <p>Prep time: {{ recipe.formatted.prep_time }}</p>
+      <img v-bind:src="recipe.image_url" alt=""><br>
+      <button v-on:click="recipe.showExtraInfo = !recipe.showExtraInfo">More Info</button>
+      <div v-if="recipe.showExtraInfo">
+        <p>Ingredients: {{ recipe.ingredients }}</p>
+        <p>Directions: {{ recipe.directions }}</p>
+        <p>Prep time: {{ recipe.formatted.prep_time }}</p>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -48,6 +51,9 @@ export default {
   // @recipes = response.parse
   created: function() {
     axios.get("/api/recipes").then(response => {
+      response.data.forEach(recipe => {
+        recipe.showExtraInfo = false;
+      });
       console.log(response.data);
       this.recipes = response.data;
     });
