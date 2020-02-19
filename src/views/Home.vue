@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+    <p>{{ recipes }}</p>
   </div>
 </template>
 
@@ -11,7 +12,8 @@
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!"
+      message: "Hello World",
+      recipes: ["Pizza", "Peanut Butter Cookies", "Empty Sandwich"]
     };
   },
   created: function() {},
