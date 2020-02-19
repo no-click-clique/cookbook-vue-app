@@ -1,6 +1,13 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
+
+    <div>
+      <h2>New Recipe</h2>
+      <button v-on:click="createRecipe()">Create</button>
+    </div>
+
+
     <div v-for="recipe in recipes">
       <h2>Title: {{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" alt="">
@@ -23,7 +30,7 @@ import axios from 'axios';
 export default {
   data: function() {
     return {
-      message: "Hello World",
+      message: "Cookbook Frontend",
       recipes: []
     };
   },
@@ -35,6 +42,24 @@ export default {
       this.recipes = response.data;
     });
   },
-  methods: {}
+  methods: {
+    createRecipe: function() {
+      var params = {
+        title: "example title",
+        ingredients: "example ingredients",
+        directions: "example directions",
+        prep_time: "example prep time",
+        image_url: "example image"
+      };
+      axios.post("/api/recipes", params)
+      .then(response => {
+        console.log("Success!", response.data);
+        this.recipes.push(response.data);
+      })
+      .catch(error => {
+        console.log(error.response.data.errors);
+      });
+    }
+  }
 };
 </script>
