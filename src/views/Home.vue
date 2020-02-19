@@ -20,6 +20,16 @@
         <p>Ingredients: {{ recipe.ingredients }}</p>
         <p>Directions: {{ recipe.directions }}</p>
         <p>Prep time: {{ recipe.formatted.prep_time }}</p>
+        <div>
+          {{recipe}}
+          <h4>Edit Recipe</h4>
+          Title: <input type="text" v-model="recipe.title"><br>
+          Ingredients: <input type="text" v-model="recipe.ingredients"><br>
+          Directions: <input type="text" v-model="recipe.directions"><br>
+          Prep Time: <input type="text" v-model="recipe.prep_time"><br>
+          Image Url: <input type="text" v-model="recipe.image_url"><br>
+          <button v-on:click="updateRecipe(recipe)">Update</button>
+        </div>
       </div>
     </div>
 
@@ -71,6 +81,22 @@ export default {
       .then(response => {
         console.log("Success!", response.data);
         this.recipes.push(response.data);
+      })
+      .catch(error => {
+        console.log(error.response.data.errors);
+      });
+    },
+    updateRecipe: function(recipe) {
+      var params = {
+        title: recipe.title,
+        ingredients: recipe.ingredients,
+        directions: recipe.directions,
+        prep_time: recipe.prep_time,
+        image_url: recipe.image_url
+      };
+      axios.patch(`/api/recipes/${recipe.id}`, params)
+      .then(response => {
+        console.log("Success!", response.data);
       })
       .catch(error => {
         console.log(error.response.data.errors);
