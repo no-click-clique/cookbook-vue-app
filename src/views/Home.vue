@@ -4,6 +4,11 @@
 
     <div>
       <h2>New Recipe</h2>
+
+      <ul>
+        <li v-for="error in errors">{{error}}</li>
+      </ul>
+      
       Title: <input type="text" v-model="newRecipeTitle"><br>
       Ingredients: <input type="text" v-model="newRecipeIngredients"><br>
       Directions: <input type="text" v-model="newRecipeDirections"><br>
@@ -56,6 +61,7 @@ export default {
       newRecipeDirections: "",
       newRecipePrepTime: null,
       newRecipeImageUrl: "",
+      errors: []
     };
   },
   // respone = HTTP.get("/api/recipes")
@@ -85,6 +91,7 @@ export default {
       })
       .catch(error => {
         console.log(error.response.data.errors);
+        this.errors = error.response.data.errors;
       });
     },
     updateRecipe: function(recipe) {
