@@ -6,39 +6,45 @@ import Test from '../views/Test.vue';
 import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
+import RecipesIndex from "../views/RecipesIndex.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: About
   },
   {
     path: '/test',
-    name: 'Test',
+    name: 'test',
     component: Test
   },
   { 
     path: "/signup", 
-    name: "Signup", 
+    name: "signup", 
     component: Signup 
   },
   { 
     path: "/login", 
-    name: "Login", 
+    name: "login", 
     component: Login 
   },
   { 
     path: "/logout", 
-    name: "Logout", 
+    name: "logout", 
     component: Logout 
+  },
+  { 
+    path: "/recipes", 
+    name: "recipes-index", 
+    component: RecipesIndex
   }
 ]
 
