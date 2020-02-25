@@ -20,11 +20,11 @@
           <input type="text" class="form-control" v-model="directions">
         </div>
         <div class="form-group">
-          <label>Prep Time</label>
+          <label>Prep Time:</label>
           <input type="number" class="form-control" v-model="prepTime">
         </div>
         <div class="form-group">
-          <label>Image Url</label>
+          <label>Image Url:</label>
           <input type="text" class="form-control" v-model="imageUrl">
         </div>
         <input type="submit" class="btn btn-primary" value="Create Recipe">

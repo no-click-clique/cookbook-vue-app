@@ -9,6 +9,8 @@
 
     <p>Created by: {{ recipe.chef }}</p>
 
+    <router-link :to="`/recipes/${recipe.id}/edit`">Edit</router-link>
+
   </div>
 </template>
 
