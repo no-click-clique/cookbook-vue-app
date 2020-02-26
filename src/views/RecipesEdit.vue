@@ -1,35 +1,38 @@
 <template>
   <div class="recipes-edit">
 
-    <div class="container">
-      <form v-on:submit.prevent="submit()">
-        <h1>Edit Recipe</h1>
-        <ul>
-          <li class="text-danger" v-for="error in errors">{{ error }}</li>
-        </ul>
-        <div class="form-group">
-          <label>Title:</label> 
-          <input type="text" class="form-control" v-model="recipe.title">
-        </div>
-        <div class="form-group">
-          <label>Ingredients:</label>
-          <input type="text" class="form-control" v-model="recipe.ingredients">
-        </div>
-        <div class="form-group">
-          <label>Directions:</label>
-          <input type="text" class="form-control" v-model="recipe.directions">
-        </div>
-        <div class="form-group">
-          <label>Prep Time</label>
-          <input type="number" class="form-control" v-model="recipe.prep_time">
-        </div>
-        <div class="form-group">
-          <label>Image Url</label>
-          <input type="text" class="form-control" v-model="recipe.image_url">
-        </div>
-        <input type="submit" class="btn btn-primary" value="Update Recipe">
-      </form>
+    <form v-on:submit.prevent="submit()">
+      <h1>Edit Recipe</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label> 
+        <input type="text" class="form-control" v-model="recipe.title">
+      </div>
+      <div class="form-group">
+        <label>Ingredients:</label>
+        <input type="text" class="form-control" v-model="recipe.ingredients">
+      </div>
+      <div class="form-group">
+        <label>Directions:</label>
+        <input type="text" class="form-control" v-model="recipe.directions">
+      </div>
+      <div class="form-group">
+        <label>Prep Time</label>
+        <input type="number" class="form-control" v-model="recipe.prep_time">
+      </div>
+      <div class="form-group">
+        <label>Image Url</label>
+        <input type="text" class="form-control" v-model="recipe.image_url">
+      </div>
+      <input type="submit" class="btn btn-primary" value="Update Recipe">
+    </form>
+    
+    <div>
+      <button v-on:click="destroyRecipe()">Delete Recipe</button>
     </div>
+    
 
   </div>
 </template>
@@ -67,6 +70,13 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
+    },
+    destroyRecipe: function() {
+      axios.delete(`/api/recipes/${this.recipe.id}`)
+      .then(response => {
+        console.log("Success", response.data);
+        this.$router.push("/recipes");
+      });
     }
   }
 };

@@ -7,7 +7,7 @@
     <h4>Directions: {{ recipe.directions }}</h4>
     <h5>Prep Time: {{ recipe.formatted.prep_time }}</h5>
 
-    <p>Created by: {{ recipe.chef }}</p>
+    <p>Created by: {{ recipe.user.name }}</p>
 
     <router-link :to="`/recipes/${recipe.id}/edit`">Edit</router-link>
 

@@ -6,7 +6,7 @@
       <router-link :to="`/recipes/${recipe.id}`">
         <img v-bind:src="recipe.image_url" alt=""><br>
       </router-link>
-      <h5>Prep time: {{ recipe.formatted.prep_time }}</h5>
+      <h5>Prep time: {{ recipe.prep_time }}</h5>
     </div>
 
   </div>
