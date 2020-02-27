@@ -24,9 +24,8 @@
       <div v-if="recipe.showExtraInfo">
         <p>Ingredients: {{ recipe.ingredients }}</p>
         <p>Directions: {{ recipe.directions }}</p>
-        <p>Prep time: {{ recipe.formatted.prep_time }}</p>
+        <p>Prep time: {{ recipe.prep_time }}</p>
         <div>
-          {{ recipe }}
           <h4>Edit Recipe</h4>
           Title: <input type="text" v-model="recipe.title"><br>
           Ingredients: <input type="text" v-model="recipe.ingredients"><br>
