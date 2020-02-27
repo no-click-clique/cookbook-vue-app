@@ -48,6 +48,9 @@ export default {
       } else {
         return false;
       }
+    },
+    getUserId: function() {
+      return localStorage.getItem("user_id");
     }
   }
 };
