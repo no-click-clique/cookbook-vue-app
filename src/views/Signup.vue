@@ -10,6 +10,7 @@
         <div class="form-group">
           <label>Name:</label> 
           <input type="text" class="form-control" v-model="name">
+          <small v-if="name" v-bind:class="{'text-danger': 20 - name.length < 5}">{{ 20 - name.length }} characters remaining</small>
         </div>
         <div class="form-group">
           <label>Email:</label>
@@ -18,10 +19,13 @@
         <div class="form-group">
           <label>Password:</label>
           <input type="password" class="form-control" v-model="password">
+          <small class="text-warning" v-if="password && password.length < 6">Must be at least 6 characters</small>
+          <small class="text-danger" v-if="password.length > 20">Cannot exceed 20 characters</small>
         </div>
         <div class="form-group">
           <label>Password confirmation:</label>
           <input type="password" class="form-control" v-model="passwordConfirmation">
+          <small v-if="password && passwordConfirmation !== password">Must match password</small>
         </div>
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
