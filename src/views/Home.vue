@@ -43,7 +43,7 @@
 
 <style>
  img {
-  width: 250px;
+  width: 300px;
  }
 </style>
 
