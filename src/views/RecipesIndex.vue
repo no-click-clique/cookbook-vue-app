@@ -1,5 +1,5 @@
 <template>
-  <div class="recipes-index text-center">
+  <div class="recipes-index">
 
 
     <div id="fh5co-work-section">
@@ -10,8 +10,9 @@
             <p>What do you want to cook today?</p>
           </div>
         </div>
+    
         <div class="row">
-          <div v-for="recipe in recipes" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
+          <div v-for="recipe in filterBy(recipes, $parent.titleFilter, 'title')" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
             <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
               <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
               <div class="v-align">
@@ -41,8 +42,10 @@
 <script>
 import axios from 'axios';
 import moment from 'moment';
+import Vue2Filters from 'vue2-filters';
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       recipes: [],
