@@ -12,12 +12,14 @@
         </div>
         <div>
           Search by title: <input type="text" v-model="titleFilter" list="titles">
+          <button class="btn btn-primary" v-on:click="sortAttribute = 'title'">Search by title</button>
+          <button class="btn btn-primary" v-on:click="sortAttribute = 'prep_time'">Search by prep time</button>
         </div>
         <datalist id="titles">
           <option v-for="recipe in recipes">{{ recipe.title }}</option>
         </datalist>
         <div class="row">
-          <div v-for="recipe in filterBy(recipes, titleFilter, 'title')" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
+          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title'), sortAttribute)" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
             <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
               <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
               <div class="v-align">
@@ -55,7 +57,8 @@ export default {
     return {
       recipes: [],
       currentRecipe: {},
-      titleFilter: ""
+      titleFilter: "",
+      sortAttribute: "title"
     };
   },
   created: function() {
