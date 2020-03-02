@@ -1,12 +1,30 @@
 <template>
   <div class="recipes-index text-center">
 
-    <div v-for="recipe in recipes" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }">
-      <h2>Title: {{ recipe.title }}</h2>
-      <router-link :to="`/recipes/${recipe.id}`">
-        <img v-bind:src="recipe.image_url" alt=""><br>
-      </router-link>
-      <h5>Prep time: {{ recipe.prep_time }}</h5>
+
+    <div id="fh5co-work-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+            <h2>All Recipes</h2>
+            <p>What do you want to cook today?</p>
+          </div>
+        </div>
+        <div class="row">
+          <div v-for="recipe in recipes" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
+            <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
+              <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
+              <div class="v-align">
+                <div class="v-align-middle">
+                  <h3 class="title">{{ recipe.title }}</h3>
+                  <h5 class="category">Prep time: {{ recipe.prep_time }}</h5>
+                  <h5 class="category">Created {{ relativeDate(recipe.created_at) }}</h5>
+                </div>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -22,6 +40,8 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
+
 export default {
   data: function() {
     return {
@@ -35,6 +55,10 @@ export default {
       this.recipes = response.data;
     });
   },
-  methods: {}
+  methods: {
+    relativeDate: function(date) {
+      return moment(date).fromNow();
+    }
+  }
 };
 </script>
