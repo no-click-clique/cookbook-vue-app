@@ -12,14 +12,14 @@
         </div>
         <div>
           Search by title: <input type="text" v-model="titleFilter" list="titles">
-          <button class="btn btn-primary" v-on:click="sortAttribute = 'title'">Search by title</button>
-          <button class="btn btn-primary" v-on:click="sortAttribute = 'prep_time'">Search by prep time</button>
+          <button class="btn" v-on:click="sortAttribute = 'title'" v-bind:class="{'btn-primary': sortAttribute == 'title'}">Search by title</button>
+          <button class="btn" v-on:click="sortAttribute = 'prep_time'" v-bind:class="{'btn-primary': sortAttribute == 'prep_time'}">Search by prep time</button>
         </div>
         <datalist id="titles">
           <option v-for="recipe in recipes">{{ recipe.title }}</option>
         </datalist>
-        <div class="row">
-          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title'), sortAttribute)" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
+        <transition-group class="row" appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title'), sortAttribute)" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4" v-bind:key="recipe.id">
             <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
               <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
               <div class="v-align">
@@ -31,7 +31,7 @@
               </div>
             </router-link>
           </div>
-        </div>
+        </transition-group>
       </div>
     </div>
 
