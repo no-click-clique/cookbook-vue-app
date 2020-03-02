@@ -11,8 +11,11 @@
           </div>
         </div>
         <div>
-          Search by title: <input type="text" v-model="titleFilter">
+          Search by title: <input type="text" v-model="titleFilter" list="titles">
         </div>
+        <datalist id="titles">
+          <option v-for="recipe in recipes">{{ recipe.title }}</option>
+        </datalist>
         <div class="row">
           <div v-for="recipe in filterBy(recipes, titleFilter, 'title')" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
             <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
