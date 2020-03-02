@@ -12,7 +12,6 @@
               <li v-if="!isLoggedIn()"><router-link to="/login">Login</router-link></li>
               <li v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link></li>
               <li v-if="!isLoggedIn()" class="cta"><router-link to="/signup">Signup</router-link></li>
-              <li><input type="text" class="form-control" v-model="titleFilter" placeholder="search"></li>
             </ul>
           </nav>
         </div>
@@ -68,11 +67,6 @@
 
 <script>
 export default {
-  data: function() {
-    return {
-      titleFilter: ""
-    };
-  },
   methods: {
     isLoggedIn: function() {
       if (localStorage.getItem("jwt")) {

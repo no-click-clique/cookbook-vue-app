@@ -10,9 +10,11 @@
             <p>What do you want to cook today?</p>
           </div>
         </div>
-    
+        <div>
+          Search by title: <input type="text" v-model="titleFilter">
+        </div>
         <div class="row">
-          <div v-for="recipe in filterBy(recipes, $parent.titleFilter, 'title')" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
+          <div v-for="recipe in filterBy(recipes, titleFilter, 'title')" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4">
             <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
               <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
               <div class="v-align">
@@ -49,7 +51,8 @@ export default {
   data: function() {
     return {
       recipes: [],
-      currentRecipe: {}
+      currentRecipe: {},
+      titleFilter: ""
     };
   },
   created: function() {
