@@ -18,20 +18,50 @@
         <datalist id="titles">
           <option v-for="recipe in recipes">{{ recipe.title }}</option>
         </datalist>
+
         <transition-group class="row" appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
           <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title'), sortAttribute)" v-on:click="currentRecipe = recipe" v-bind:class="{ selected: recipe === currentRecipe }" class="col-md-4" v-bind:key="recipe.id">
-            <router-link :to="`/recipes/${recipe.id}`" class="item-grid text-center">
-              <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
+            <div class="item-grid text-center">
+              <router-link :to="`/recipes/${recipe.id}`">
+                <div class="image" :style="`background-image: url(${recipe.image_url})`"></div>
+              </router-link>
               <div class="v-align">
                 <div class="v-align-middle">
                   <h3 class="title">{{ recipe.title }}</h3>
                   <h5 class="category">Prep time: {{ recipe.prep_time }}</h5>
                   <h5 class="category">Created {{ relativeDate(recipe.created_at) }}</h5>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recipeDetailsModal" v-on:click="currentRecipe = recipe">
+                    Details
+                  </button>
                 </div>
               </div>
-            </router-link>
+            </div>
+
           </div>
         </transition-group>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="recipeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ currentRecipe.title }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img :src="currentRecipe.image_url" alt="">
+            <p>Ingredients: {{ currentRecipe.ingredients }}</p>
+            <p>Directions: {{ currentRecipe.directions }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
 
