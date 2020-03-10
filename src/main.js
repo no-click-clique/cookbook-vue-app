@@ -4,8 +4,7 @@ import router from './router';
 import axios from 'axios';
 import "animate.css";
 
-axios.defaults.baseURL = 
-  process.env.NODE_ENV === "development" ? "https://no-click-clique-cookbook.herokuapp.com/" : "/";
+axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "https://no-click-clique-cookbook.herokuapp.com/" : "/";
 
 var jwt = localStorage.getItem("jwt");
 if (jwt) {
